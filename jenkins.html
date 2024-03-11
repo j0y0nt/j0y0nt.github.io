@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Day Zero</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+</head>
+
+<body link="#800080" bgcolor="#ffffff" text="#000080" vlink="#ff0000">
+    <p align="center">
+        <b>
+            <font size="6">Hey,</font>
+            <font size="4"></font>
+            <font size="6">H</font>
+            <font size="4">ow you doing?</font>
+            <font size="2">
+                <br>About Cloud & Programming<br>& Other Stuffs.
+            </font>
+            <br>
+        </b>
+        <font size="1">&nbsp;</font>
+    </p>
+    <div class="container is-fluid">
+        <div class="tabs">
+            <ul>
+                <li class="is-active"><a href="./index.html">AWS Lambda CheatSheet</a></li>
+                <li class="is-active"><a >Jenkins</a></li>
+            </ul>
+        </div>
+        <article class="message is-link">
+            <div class="message-header">
+                <p>Link</p>
+                <button class="delete" aria-label="delete"></button>
+            </div>
+            <div class="message-body content">
+                <p>
+                1. Download jenkins.war from https://www.jenkins.io/download/.
+                </p>
+                <p>
+                    2. Download Apache Tomcat from
+                     https://tomcat.apache.org/download-90.cgi.
+                      For windows version download -> https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.86/bin/apache-tomcat-9.0.86.zip
+
+	                Files get downloaded from ~/Download directory on windows.
+	                Right click on file name and select Extract to 
+                    [USER_HOME]\Downloads\apache-tomcat-9.0.86 directory.
+	                Once extraction is complete "apache-tomcat-9.0.86" will be
+                     created in "Downloads" directory. Click on it. It will
+                    have another "apache-tomcat-9.0.86" directory in it.
+                    Copy "apache-tomcat-9.0.86" to downloads directory. Copy the
+                     extracted DIR to C:\software\apache-tomcat-9.0.86
+                </p>
+
+                <p>
+                    3. Copy jenkins.war from download directory to
+                     C:\software\apache-tomcat-9.0.86\webapps.
+                </p>
+
+                <p>
+                    4. Open command prompt and change to 
+                    C:\software\apache-tomcat-9.0.86\ path.
+   
+                    c:\> cd C:\software\apache-tomcat-9.0.86\
+                </p>
+
+                <p>
+                    5. When you type .. "dir bin" command,  it will list 
+                    content of the "C:\software\apache-tomcat-9.0.86\bin" 
+                    directory. As this is windows machine, we are only 
+                    interested in startup.bat script.
+                </p>
+
+                <p>
+                    6. From command prompt type & and it will start the Apache 
+                    Tomcat server.
+                    
+                    C:\software\apache-tomcat-9.0.86\webapps> .\bin\startup.bat 
+                     
+                </p>
+
+                <p style="white-space: pre-wrap">
+7. A window with title "Tomcat" will open. If you observer logs generated in"Tomcat" window, it will start "jenkins" deployment. In the end following line will be visible,
+
+        11-Mar-2024 14:33:34.835 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+        11-Mar-2024 14:33:34.945 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [16800] milliseconds
+        11-Mar-2024 14:33:35.494 INFO [pool-8-thread-31] jenkins.InitReactorRunner$1.onAttained Prepared all plugins
+        11-Mar-2024 14:33:35.510 INFO [pool-8-thread-2] jenkins.InitReactorRunner$1.onAttained Started all plugins
+        11-Mar-2024 14:33:35.526 INFO [pool-8-thread-8] jenkins.InitReactorRunner$1.onAttained Augmented all extensions
+        11-Mar-2024 14:33:36.043 INFO [pool-8-thread-14] jenkins.InitReactorRunner$1.onAttained System config loaded
+        11-Mar-2024 14:33:36.043 INFO [pool-8-thread-14] jenkins.InitReactorRunner$1.onAttained System config adapted
+        11-Mar-2024 14:33:36.043 INFO [pool-8-thread-14] jenkins.InitReactorRunner$1.onAttained Loaded all jobs
+        11-Mar-2024 14:33:36.046 INFO [pool-8-thread-32] jenkins.InitReactorRunner$1.onAttained Configuration for all jobs updated
+        11-Mar-2024 14:33:36.078 INFO [Download metadata thread] hudson.util.Retrier.start Attempt #1 to do the action check updates server
+        11-Mar-2024 14:33:36.690 INFO [Finalizing set up] jenkins.install.SetupWizard.init
+
+        *************************************************************
+        *************************************************************
+        *************************************************************
+
+        Jenkins initial setup is required. An admin user has been created and a password generated.
+        Please use the following password to proceed to installation:
+
+        744934d7c94c43648b59bd001b4891ed
+
+        This may also be found at: C:\Users\j0user\.jenkins\secrets\initialAdminPassword
+
+        *************************************************************
+        *************************************************************
+        *************************************************************
+                
+                </p>
+
+                <p>
+                    8. When you access http://localhost:8080/jenkins/ url in Firefox browser. It will redirect you to below URL (this is because you have started jenkins first time.) 
+
+	http://localhost:8080/jenkins/login?from=%2Fjenkins%2F (see screenshot)
+                </p>
+
+                <p>
+                    9. You jave to enter password printed in Tomcat windwos. See success log. Point 7.
+                </p>
+
+
+                <p>
+                    10. On successful login, you will see Customize Jenkins screens, with two options. "Install Suggested plugins" and "Select plugins to install". Select "Install Suggested plugins" to install community suggested plugins. Which is nice default. Wait for installation of plugins to finish.
+                </p>
+
+                <p>
+                    11. Once installation is complete, it will automatically take you to next screen to "Create First Admin User". Enter username, password, confirm password, Full name and email address. Click Save and continue.
+                </p>
+
+                <p>
+                    12. On next "Instance Configuration" screen, leave default url as it is if you are running in your dev environment or set according to everyone else on team will see. The best practice is to set this value to the URL that users are expected to use. This will avoid confusion when sharing or viewing links.
+                </p>
+
+                <p>
+                    13. Next screen if Start using jenkins. Click continue and it will take you to homescreen.
+                </p>
+	
+            </div>
+        </article>
+
+        <article class="message is-warning">
+            <div class="message-header">
+              <p>Warning</p>
+              <button class="delete" aria-label="delete"></button>
+            </div>
+            <div class="message-body" style="white-space: pre-wrap">
+                If you see below error:
+
+                11-Mar-2024 14:21:44.176 SEVERE [main] org.apache.catalina.core.StandardContext.startInternal One or more listeners failed to start.
+                Full details will be found in the appropriate container log file
+                11-Mar-2024 14:21:44.223 SEVERE [main] org.apache.catalina.core.StandardContext.startInternal Context [/jenkins] startup failed due to previous errors
+                
+                then jenkins deployment failed. Check 
+                
+                C:\software\apache-tomcat-10.1.19\logs\localhost.... file. For example below error appeared because of 
+                <strong><a href="https://stackoverflow.com/questions/66711660/tomcat-10-x-throws-java-lang-noclassdeffounderror-on-javax-servlet" target="_blank">https://stackoverflow.com/questions/66711660/tomcat-10-x-throws-java-lang-noclassdeffounderror-on-javax-servlet</a></strong> issue.
+                
+                11-Mar-2024 14:21:44.176 SEVERE [main] org.apache.catalina.core.StandardContext.listenerStart Error configuring application listener of class [hudson.WebAppMain]
+                    java.lang.NoClassDefFoundError: javax/servlet/ServletContextListener
+                        at java.base/java.lang.ClassLoader.defineClass1(Native Method)
+                        at java.base/java.lang.ClassLoader.defineClass(ClassLoader.java:1017)
+                        at java.base/java.security.SecureClassLoader.defineClass(SecureClassLoader.java:150)
+                        at org.apache.catalina.loader.WebappClassLoaderBase.findClassInternal(WebappClassLoaderBase.java:2352)
+            </div>
+          </article>
+    </div>
+    </div>
+</body>
+
+</html>
