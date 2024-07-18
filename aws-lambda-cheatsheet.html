@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Day Zero</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+  </head>
+  <body link="#800080" bgcolor="#ffffff" text="#000080" vlink="#ff0000">
+    <p align="center">
+      <b>
+        <font size="6">Hey,</font>
+        <font size="4"></font>
+        <font size="6">H</font>
+        <font size="4">ow you doing?</font>
+        <font size="2">
+          <br>About Cloud & Programming<br>& Other Stuffs.
+        </font>
+        <br>
+      </b>
+      <font size="1">&nbsp;</font></p>
+      <div class="container is-fluid">
+      <div class="tabs">
+        <ul>
+          <li class="is-active"><a href="/">Home</a></li>
+        </ul>  
+      </div>
+      <div class="content" style="white-space: pre-wrap">
+      <strong>aws lambda create-alias --name routing-alias --function-name my-function --function-version 1 --routing-config AdditionalVersionWeights={"2"=0.03}</strong>
+
+      <strong>aws lambda update-alias --name routing-alias --function-name my-function  --routing-config AdditionalVersionWeights={"2"=0.05}</strong>
+
+      <strong>aws lambda update-alias --name routing-alias --function-name my-function --function-version 2 --routing-config AdditionalVersionWeights={}</strong>
+
+      <strong>aws lambda publish-version --function-name my-function</strong>
+
+      <strong>aws lambda update-function-url-config --function-name my-function --invoke-mode RESPONSE_STREAM</strong>
+
+      # Invoke synchronous event
+      <strong>aws lambda invoke --function-name my-function --cli-binary-format raw-in-base64-out --payload '{ "key": "value" }' response.json</strong>
+      
+      # Invoke asynchornous event 
+      <strong>aws lambda invoke --function-name my-function --invocation-type Event --cli-binary-format raw-in-base64-out --payload '{ "key": "value" }' response.json</strong>
+
+      # Configure Async event Invocation
+      <strong>aws lambda put-function-event-invoke-config --function-name error --maximum-event-age-in-seconds 3600 --maximum-retry-attempts 0</strong>
+
+      #  To configure an option without resetting others, use update-function-event-invoke-config
+      <strong>aws lambda update-function-event-invoke-config --function-name error --destination-config '{"OnFailure":{"Destination": "arn:aws:sqs:us-east-2:123456789012:destination"}}'</strong>
+
+      # To send events to a queue or topic, your function needs additional permissions
+      Amazon SQS – sqs:SendMessage
+      Amazon SNS – sns:Publish
+
+      # To configure a dead-letter queue with the AWS CLI, use the update-function-configuration
+      <strong>aws lambda update-function-configuration --function-name my-function --dead-letter-config TargetArn=arn:aws:sns:us-east-2:123456789012:my-topic</strong>
+
+      # To create a new event source mapping with these filter criteria using the AWS Command Line Interface (AWS CLI), run the following command.
+      <strong>aws lambda create-event-source-mapping --function-name my-function --event-source-arn arn:aws:sqs:us-east-2:123456789012:my-queue --filter-criteria '{"Filters": [{"Pattern": "{ \"Metadata\" : [ 1, 2 ]}"}]}</strong>
+
+      # To add these filter criteria to an existing event source mapping, run the following command.
+      <strong>aws lambda update-event-source-mapping --uuid "a1b2c3d4-5678-90ab-cdef-11111EXAMPLE" --filter-criteria '{"Filters": [{"Pattern": "{ \"Metadata\" : [ 1, 2 ]}"}]}'</strong>
+
+      # To remove filter criteria from an event source, you can run the following update-event-source-mapping command with an empty FilterCriteria object.
+      <strong>aws lambda update-event-source-mapping --uuid "a1b2c3d4-5678-90ab-cdef-11111EXAMPLE" --filter-criteria "{}"</strong>
+
+      #  to configure an event source in AWS SAM to use the following filter criteria
+      FilterCriteria:
+          Filters:
+              - Pattern: '{"Metadata": [1, 2]
+
+      # Example: Dynamo DB filter criteria for Aws Lambda Function
+      <strong>aws lambda create-event-source-mapping --function-name my-function --event-source-arn arn:aws:dynamodb:us-east-2:123456789012:table/my-table \
+      --filter-criteria '{"Filters": [{"Pattern": "{ \"dynamodb\" : { \"Keys\" :{ \"CustomerName\" : { \"S\" : [ \"AnyCompany Industries\" ] } } } }"}]}</strong>
+
+      # Check state of lambda function
+      <strong>aws lambda get-function --function-name my-function --query 'Configuration.[State,LastUpdateStatus]'</strong>
+
+      # To disable an event source mapping for your function (AWS CLI)
+      aws lambda list-event-source-mappings
+      <strong>aws lambda update-event-source-mapping --function-name MyFunction --uuid a1b2c3d4-5678-90ab-cdef-EXAMPLE11111 --no-enabled</strong>
+
+      # To create a function URL for an existing Lambda function
+      <strong>aws lambda create-function-url-config \
+          --function-name my-function \
+          --qualifier prod \ // optional
+          --auth-type AWS_IAM
+          --cors-config {AllowOrigins="https://example.com"} // optional</strong>
+
+      # URL invocation permissions to another account
+      <strong>aws lambda add-permission --function-name my-function \
+          --statement-id example0-cross-account-statement \
+          --action lambda:InvokeFunctionUrl \
+          --principal 444455556666 \
+          --function-url-auth-type AWS_IAM</strong>
+
+      # Create the execution role (p. 913) that gives your function permission to access AWS resources.
+      <strong>aws iam create-role --role-name lambda-ex --assume-role-policy-document '{"Version":
+          "2012-10-17","Statement": [{ "Effect": "Allow", "Principal": {"Service":
+          "lambda.amazonaws.com"}, "Action": "sts:AssumeRole"}]}'</strong>
+
+      # To add permissions to the role, use the attach-policy-to-role command
+      <strong>aws iam attach-role-policy --role-name lambda-ex --policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRol</strong>
+
+      # Use the update-function-configuration command to configure functions.
+      <strong>aws lambda update-function-configuration --function-name my-function --memory-size 256</strong>
+
+      # to retrieve a list of functions
+      <strong>aws lambda list-functions --max-items 10</strong>
+
+      # get-function command returns Lambda function metadata and a presigned URL that you can use to download the function's deployment package
+      <strong>aws lambda get-function --function-name my-function</strong>
+
+      # to delete the my-function function
+      <strong>aws lambda delete-function --function-name my-function</strong>
+
+      # command reserves 100 concurrency units for a function named my-function:
+      <strong>aws lambda put-function-concurrency --function-name my-function --reserved-concurrent-executions 10</strong>
+
+      # command allocates 100 units of provisioned concurrency for the BLUE alias of a function named my-function
+      <strong>aws lambda put-provisioned-function-concurrency --function-name my-function --qualifier BLUE --provisioned-concurrent-executions 100</strong>
+
+      # To create a new Lambda function with tags, use the create-function command with the --tags option.
+      <strong>aws lambda create-function --function-name my-function
+          --handler index.js --runtime nodejs18.x \
+          --role arn:aws:iam::123456789012:role/lambda-role \
+          --tags Department=Marketing,CostCenter=1234ABC</strong>
+
+      # To add tags to an existing function, use the tag-resource command.
+      <strong>aws lambda tag-resource \
+          --resource arn:aws:lambda:us-east-2:123456789012:function:my-function \
+          --tags Department=Marketing,CostCenter=1234ABCD</strong>
+
+      # To remove tags, use the untag-resource command
+      <strong>aws lambda untag-resource --resource arn:aws:lambda:us-east-1:123456789012:function:my-function --tag-keys Department</strong>
+
+      # To view a list of the tags associated with this function,
+      <strong>aws lambda list-tags --resource arn:aws:lambda:us-east-1:123456789012:function:my-function</strong>
+
+      #  To view a list of the tags associated with this function,
+      <strong>aws lambda get-function --function-name my-function</strong>
+
+    
+
+    </div>
+  </div>
+</div>
+  </body>
+</html>
