@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Day Zero</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+</head>
+
+<body link="#800080" bgcolor="#ffffff" text="#000080" vlink="#ff0000">
+    <p align="center">
+        <b>
+            <font size="6">Hey,</font>
+            <font size="4"></font>
+            <font size="6">H</font>
+            <font size="4">ow you doing?</font>
+            <font size="2">
+                <br>About Cloud & Programming<br>& Other Stuffs.
+            </font>
+            <br>
+        </b>
+        <font size="1">&nbsp;</font>
+    </p>
+    <div class="container is-fluid">
+        <div class="tabs">
+            <ul>
+                <li><a href="./index.html">Home</a></li>
+            </ul>
+        </div>
+        <article class="message is-link">
+            <div class="message-header">
+                <p>MongoDB index auto creation and spring boot test containers.</p>
+            </div>
+            <div class="message-body content">
+                <p style="white-space: pre-wrap">
+                    Today a simple unit test case to throw DuplicateKeyException failed,
+                    when item with same value is inserted. Apparently in Testcontainers you have to enable
+                    following property so that MongoDB create unique index for entity(ies):
+
+                    spring.data.mongodb.auto-index-creation=true
+
+                </p>
+            </div>
+        </article>
+
+        
+    </div>
+    </div>
+</body>
+
+</html>
+
