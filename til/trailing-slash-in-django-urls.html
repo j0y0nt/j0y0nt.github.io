@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Day Zero</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+</head>
+
+<body link="#800080" bgcolor="#ffffff" text="#000080" vlink="#ff0000">
+    <p align="center">
+        <b>
+            <font size="6">Hey,</font>
+            <font size="4"></font>
+            <font size="6">H</font>
+            <font size="4">ow you doing?</font>
+            <font size="2">
+                <br>About Cloud & Programming<br>& Other Stuffs.
+            </font>
+            <br>
+        </b>
+        <font size="1">&nbsp;</font>
+    </p>
+    <div class="container is-fluid">
+        <div class="tabs">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+            </ul>
+        </div>
+        <article class="message is-dark">
+            <div class="message-header">
+                <p>Trailing slash in Django URL</p>
+            </div>
+            <div class="content">
+                <div class="box"> I am also learning python/django for a while now,
+                    and using book "Test-Driven Development with Python".
+                    <br/>
+                </div>
+                <div class="box">
+                    <code style="white-space: pre-wrap">def view_list(request, list_id):
+    list_ = List.objects.get(id=list_id)
+    return render(request, 'list.html', {'list': list_})</code>
+                </div>
+                <div class="box">
+                    I am also learning python/django for a while now,
+                    and using book "Test-Driven Development with Python". 
+                    Below is simple method to return a list of items:
+                </div>
+                <div class="box">
+                    <code style="white-space: pre-wrap">def view_list(request, list_id):
+    list_ = List.objects.get(id=list_id)
+    return render(request, 'list.html', {'list': list_}) </code>
+                </div>
+                <div class="box">
+                    And below is the test cases which, puzzled me by failing for half an hour.
+                </div>
+                <div class="box">
+                    <code style="white-space: pre-wrap">def test_passes_correct_list_to_template(self):
+    other_list = List.objects.create()
+    correct_list = List.objects.create()
+    response = self.client.get(f'/lists/{correct_list.id}/')
+    self.assertEqual(response.context['list'], correct_list)</code>
+                </div>
+
+                <div class="card">
+                    <div class="card-content">
+                      <div class="content">
+                        <h4>The fix was to use trailing slash in url. i.e. f'/lists/{correct_list.id}' should always be ending with '/'.</h4>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+          
+        </article>
+
+        
+    </div>
+    </div>
+</body>
+
+</html>
+
