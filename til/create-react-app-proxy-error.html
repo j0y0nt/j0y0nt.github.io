@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Day Zero</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+</head>
+
+<body link="#800080" bgcolor="#ffffff" text="#000080" vlink="#ff0000">
+    <p align="center">
+        <b>
+            <font size="6">Hey,</font>
+            <font size="4"></font>
+            <font size="6">H</font>
+            <font size="4">ow you doing?</font>
+            <font size="2">
+                <br>About Cloud & Programming<br>& Other Stuffs.
+            </font>
+            <br>
+        </b>
+        <font size="1">&nbsp;</font>
+    </p>
+    <div class="container is-fluid">
+        <div class="tabs">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+            </ul>
+        </div>
+        <article class="message is-dark">
+            <div class="message-header">
+                <p>Error occurred while trying to proxy: localhost:3000/login</p>
+            </div>
+            <div class="message-body content">
+                <p style="white-space: pre-wrap">
+                    I have used create-react-app to create a simple react application & trying to make call to 
+                    backend api using proxy setting as mentioned in create-react-app documentation.
+                    (https://create-react-app.dev/docs/proxying-api-requests-in-development/#configuring-the-proxy-manually)
+
+                    The documenation uses 'http://localhost:5000' for example. However if you use localhost,
+                    in your local environment, it will give below error.
+
+                    Error occurred while trying to proxy: localhost:3000/login
+
+                    The solution is to use 127.0.0.1 instead of localhost and you will be able to call the backend 
+                    without any issue.
+
+                    Example : 'http://localhost:8080/api' must be replaced with 'http://127.0.0.1:8080/api'.
+
+                    AND don't forget to restart the server.
+
+                </p>
+            </div>
+        </article>
+
+        
+    </div>
+    </div>
+</body>
+
+</html>
+
