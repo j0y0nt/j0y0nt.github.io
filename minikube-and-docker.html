@@ -3,6 +3,7 @@
 
 <head>
     <title>Day Zero</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css" />
     <link rel="stylesheet" href="./css/j0.css" />
 </head>
@@ -32,32 +33,36 @@
                 <p>Frequent Command when working with Quarkus, Kuberenets, Docker & Minikube.</p>
             </div>
         </article>
-        <div class="columns">
-            <div class="column">
+        <div class="columns is-multiline">
+            <div class="column is-one-quarter">
                 <div class="card blue-card">
                     <header class="card-header">
                         <p class="card-header-title">Create the container image for JVM execution</p>
                       </header>
                     <div class="card-content">
                       <div class="content">
-                        mvn clean package -Dquarkus.container-image.build=true
+                        > mvn clean package -Dquarkus.container-image.build=true <br/><br/>
+
+                        <font style="color:white; font-weight: 600">On Windows 11 (user quotes in proeprty names):</font>
+                        <br/><br/>
+                        > mvn clean package -D"quarkus.container-image.build"=true
                       </div>
                     </div>
                   </div>
             </div>
-            <div class="column">
+            <div class="column is-one-quarter">
                 <div class="card grey-card">
                     <header class="card-header">
                         <p class="card-header-title">Starting minikube</p>
                       </header>
                     <div class="card-content">
-                      <div class="content">
-                        minikube start
+                        <div class="content">
+                            > minikube start
                       </div>
                     </div>
                   </div>
             </div>
-            <div class="column">
+            <div class="column is-one-quarter">
                 <div class="blue-card card">
                     <header class="card-header">
                         <p class="card-header-title">To point your shell to minikube's docker-daemon</p>
@@ -69,7 +74,7 @@
                     </div>
                   </div>
             </div>
-            <div class="column">
+            <div class="column is-one-quarter">
                 <div class="card grey-card">
                     <header class="card-header">
                         <p class="card-header-title">Context issue:</p>
@@ -78,10 +83,40 @@
                       <div class="content">
                         Unable to resolve the current Docker CLI context "default": context "default": context not found
                         <br/><br/>
-                        docker context use default
+                            > docker context use default
                       </div>
                     </div>
                   </div>
+            </div>
+
+            <div class="column is-one-quarter">
+                <div class="card blue-card">
+                    <header class="card-header">
+                        <p class="card-header-title">Deploy to Minikube!</p>
+                    </header>
+                    <div class="card-content">
+                        <div class="content">
+                            > mvn clean package -Dquarkus.kubernetes.deploy=true<br/><br/>
+
+                            <font style="color:white; font-weight: 600">On Windows 11 (user quotes in proeprty names):</font>
+                            <br/><br/>
+                            > mvn clean package -D"quarkus.kubernetes.deploy"=true
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column is-one-quarter">
+                <div class="card grey-card">
+                    <header class="card-header">
+                        <p class="card-header-title">To access service locally on minikube</p>
+                    </header>
+                    <div class="card-content">
+                        <div class="content">
+                            > minikube.exe service {REPLACE_WITH_SERVICE_NAME}<br/>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         
