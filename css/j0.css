@@ -1,3 +1,11 @@
+* {
+    margin: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
 #appdiv {
     display: flex;
     justify-content: space-around;
@@ -7,3 +15,15 @@ a {
     color: black;
     text-decoration: underline;
 }
+
+#command-divs div {
+}
+
+.blue-card {
+    --bulma-card-background-color: darkslateblue;
+}
+
+.grey-card {
+    --bulma-card-background-color: darkslategrey;
+}
+

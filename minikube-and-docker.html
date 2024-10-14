@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Day Zero</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css" />
+    <link rel="stylesheet" href="./css/j0.css" />
+</head>
+
+<body link="#800080" bgcolor="#ffffff" text="#000080" vlink="#ff0000">
+    <p align="center">
+        <b>
+            <font size="6">Hey,</font>
+            <font size="4"></font>
+            <font size="6">H</font>
+            <font size="4">ow you doing?</font>
+            <font size="2">
+                <br>About Cloud & Programming<br>& Other Stuffs.
+            </font>
+            <br>
+        </b>
+        <font size="1">&nbsp;</font>
+    </p>
+    <div class="container is-fluid">
+        <div class="tabs">
+            <ul>
+                <li><a href="./index.html">Home</a></li>
+            </ul>
+        </div>
+        <article class="message is-link">
+            <div class="message-header">
+                <p>Frequent Command when working with Quarkus, Kuberenets, Docker & Minikube.</p>
+            </div>
+        </article>
+        <div class="columns">
+            <div class="column">
+                <div class="card blue-card">
+                    <header class="card-header">
+                        <p class="card-header-title">Create the container image for JVM execution</p>
+                      </header>
+                    <div class="card-content">
+                      <div class="content">
+                        mvn clean package -Dquarkus.container-image.build=true
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="column">
+                <div class="card grey-card">
+                    <header class="card-header">
+                        <p class="card-header-title">Starting minikube</p>
+                      </header>
+                    <div class="card-content">
+                      <div class="content">
+                        minikube start
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="column">
+                <div class="blue-card card">
+                    <header class="card-header">
+                        <p class="card-header-title">To point your shell to minikube's docker-daemon</p>
+                      </header>
+                    <div class="card-content">
+                      <div class="content">
+                        > minikube -p minikube docker-env --shell powershell | Invoke-Expression
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="column">
+                <div class="card grey-card">
+                    <header class="card-header">
+                        <p class="card-header-title">Context issue:</p>
+                      </header>
+                    <div class="card-content">
+                      <div class="content">
+                        Unable to resolve the current Docker CLI context "default": context "default": context not found
+                        <br/><br/>
+                        docker context use default
+                      </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+        
+    </div>
+    </div>
+</body>
+
+</html>
+
