@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Day Zero</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css" />
+    <link rel="stylesheet" href="./css/j0.css" />
+</head>
+<body link="#800080"  text="#000080" vlink="#ff0000">
+    <div>
+
+        <p align="center">
+            <b>
+                <font size="6">Hey,</font>
+                <font size="4"></font>
+                <font size="6">H</font>
+                <font size="4">ow you doing?</font>
+                <font size="2">
+                    <br>About Cloud & Programming<br>& Other Stuffs.
+                </font>
+                <br>
+            </b>
+            <font size="1">&nbsp;</font>
+        </p>
+        <div class="container is-fluid">
+            <div class="tabs">
+                <ul>
+                    <li><a href="./index.html">Home</a></li>
+                </ul>
+            </div>
+            <article class="message is-link">
+                <div class="message-header">
+                    <p>Windows 11 curl = Powershell Invoke-WebRequest.</p>
+                </div>
+            </article>
+            <div class="columns is-multiline">
+                <div class="column">
+                    <div class="card blue-card">
+                        <header class="card-header">
+                            <p class="card-header-title">To make post reuest</p>
+                        </header>
+                        <div class="card-content">
+                        <div class="content">
+                            Set headers first on command prompt.
+                            <br/> <br/>
+                            <code>
+                            $headers = @{
+                                >>     "Content-Type" = "application/json"
+                                >>     "Authorization" = "Bearer YOUR_ACCESS_TOKEN"
+                                >> }
+                            </code>
+                            <br />
+                            <br />
+                            Then send the POST request by running below command:
+                            <br />
+                            <br />
+                            <code>
+                            Invoke-WebRequest -Uri "http://127.0.0.1:53251/transactions/async/444666" -Method POST -Headers $headers -Body "5.63"
+                            </code>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+        </div>
+    </div>
+    
+</body>
+
+</html>
+
