@@ -61,7 +61,7 @@
                 </div>
 
                 <div class="column is-one-quarter">
-                    <div class="card grey-card">
+                    <div class="card blue-card">
                         <header class="card-header">
                             <p class="card-header-title">Quarkus cli command to create reactive service project. (It is better than maven command)</p>
                         </header>
@@ -73,6 +73,50 @@
                     </div>
                 </div>
                 
+                <div class="column is-one-quarter">
+                    <div class="card grey-card">
+                        <header class="card-header">
+                            <p class="card-header-title">Quarkus: Running Reactive Service with Kafka inside minikube cluster</p>
+                        </header>
+                        <div class="card-content">
+                            <div class="content">
+                                > minikube start --memory=4096 <br/>
+                                > kubectl create namespace kafka <br/>
+                                >  kubectl create -f .\strimzi-cluster-operator-0.25.0.yaml -n kafka<br/>
+                                > kubectl apply -f .\kafka_cluster.yml -n kafka
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column is-one-quarter">
+                    <div class="card blue-card">
+                        <header class="card-header">
+                            <p class="card-header-title">Quarkus: Starting Kafka Producer inside minikube cluster</p>
+                        </header>
+                        <div class="card-content">
+                            <div class="content">
+                                >  kubectl -n kafka run kafka-producer -ti --image=quay.io/strimzi/kafka:0.43.0-kafka-3.8.0 --rm=true --restart=Never -- bin/kafka-console-p
+                                roducer.sh --bootstrap-server my-cluster-kafka-bootstrap:9092 --topic my-topic
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column is-one-quarter">
+                    <div class="card grey-card">
+                        <header class="card-header">
+                            <p class="card-header-title">Quarkus: Starting Kafka Consumer inside minikube cluster</p>
+                        </header>
+                        <div class="card-content">
+                            <div class="content">
+                                > kubectl -n kafka run kafka-consumer -ti --image=quay.io/strimzi/kafka:0.43.0-kafka-3.8.0 --rm=true --restart=Never -- bin/kafka-console-consumer.sh --bootstrap-server my-cluster-kafka-bootstrap:9092 --topic my-topic --from-beginning
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+               
                 
                 
             </div>
