@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Day Zero</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css" />
+    <link rel="stylesheet" href="./css/j0.css" />
+</head>
+<body link="#800080"  text="#000080" vlink="#ff0000">
+    <div>
+
+        <p align="center">
+            <b>
+                <font size="6">Hey,</font>
+                <font size="4"></font>
+                <font size="6">H</font>
+                <font size="4">ow you doing?</font>
+                <font size="2">
+                    <br>About Cloud & Programming<br>& Other Stuffs.
+                </font>
+                <br>
+            </b>
+            <font size="1">&nbsp;</font>
+        </p>
+        <div class="container is-fluid">
+            <div class="tabs">
+                <ul>
+                    <li><a href="./index.html">Home</a></li>
+                </ul>
+            </div>
+            <article class="message is-link">
+                <div class="message-header">
+                    <p>Erlang module vs Java Class</p>
+                </div>
+            </article>
+            <p>So, I am reading Joe Armstrong's thesis "Making reliable distributed systems in the presence of sofware errors" and in chapter 3, page 42, there is an erlang module introduction. The code is below, but I think we need more new programming languages, which let us express same idea in fewer lines of code. World need more programming language people.</p>
+            <br/>
+            <div class="columns is-multiline">
+                <div class="column is-one-quarter">
+                    <div class="card blue-card">
+                        <header class="card-header">
+                            <p class="card-header-title">An erlang module</p>
+                        </header>
+                        <div class="card-content">
+                        <div class="content">
+<pre>
+    -module(math).
+    -export([areas/1]).
+    -import(lists, [map/2]).
+    
+    areas(L) ->
+        lists:sum(
+            map(
+                fun(I) -> area(I) end,
+            )).
+    
+    area({square, X}) ->
+        X*X;
+    area({rectangle,X,Y}) ->
+        X*Y.
+</pre>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-half">
+                    <div class="card grey-card">
+                        <header class="card-header">
+                            <p class="card-header-title">Wanna be Java program</p>
+                        </header>
+                        <div class="card-content">
+                            <div class="content">
+<pre>
+    package org.j0.jnfeatures.records;
+
+    import java.util.List;
+    
+    public class LikeErl {
+        interface Shape { 
+            double area();
+        };
+        
+        record Square(double  side) implements Shape {
+            public double  area() {
+                return side * side;
+            }
+        }
+        
+        record Rectangle(double  length, double  width)   implements Shape{
+            public double  area() {
+                return length * width;
+            }
+        }
+        
+        public static double sumOfAreas(List&lt;Shape&gt; shapes) {
+            if(shapes ==null || shapes.isEmpty()) {
+                return 0.0;
+            }
+            return shapes.stream().mapToDouble(s -> getArea(s)).sum();
+        }
+        
+        public static double getArea(Shape s) {
+            return switch (s) {
+                case Rectangle r -> r.area();
+                case Square sqr  -> sqr.area();
+                default          -> throw new IllegalArgumentException("Unrecognized shape");
+            };
+        }
+        
+        public static void main(String[] args) {
+            Square s = new Square(2.5);
+            Rectangle r = new Rectangle(2.3, 2.7);
+            System.out.println(getArea(s));
+            System.out.println(getArea(r));
+            
+            var totalAreas = sumOfAreas(List.of(s, r));
+            System.out.println(totalAreas);
+        }
+    
+    }
+    
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+        </div>
+    </div>
+    
+</body>
+
+</html>
+
