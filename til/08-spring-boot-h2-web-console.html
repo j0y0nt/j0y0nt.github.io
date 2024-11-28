@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Day Zero</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css" />
+    <link rel="stylesheet" href="./css/j0.css" />
+</head>
+<body link="#800080"  text="#000080" vlink="#ff0000">
+    <div>
+
+        <p align="center">
+            <b>
+                <font size="6">Hey,</font>
+                <font size="4"></font>
+                <font size="6">H</font>
+                <font size="4">ow you doing?</font>
+                <font size="2">
+                    <br>About Cloud & Programming<br>& Other Stuffs.
+                </font>
+                <br>
+            </b>
+            <font size="1">&nbsp;</font>
+        </p>
+        <div class="container is-fluid">
+            <div class="tabs">
+                <ul>
+                    <li><a href="./index.html">Home</a></li>
+                </ul>
+            </div>
+            <article class="message is-link">
+                <div class="message-header">
+                    <p>TIL08 - Enable h2 web-console in spring boot app.</p>
+                </div>
+            </article>
+            <p></p>
+            <br/>
+            <div class="columns is-multiline">
+                <div class="column">
+                    <div class="card blue-card">
+                        <header class="card-header">
+                            <p class="card-header-title"></p>
+                        </header>
+                        <div class="card-content">
+                            <div class="content">
+                                <p>
+                                    Self-reminder! - Save time by doing this in new spring boot project when h2 db is used for testing or whatever.
+                                </p>
+                                <br/>
+                                <p>
+                                    In application.properties:
+                                    <code>
+                                    <br/><br/> 
+                                    spring.h2.console.enabled=true
+                                    <br/> <br/>    
+spring.datasource.url=jdbc:h2:mem:mydb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE<br/>
+spring.datasource.driverClassName=org.h2.Driver<br/>
+spring.datasource.username=sa<br/>
+spring.datasource.password=password<br/>
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect<br/>
+</code>
+                                </p>
+                               
+                                <p>
+                                    If You are using spring security, add below config, because h2 uses embedded frame and then you get 403 because of CSRF protection:
+                                </p>
+
+                                <p><pre>
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer.FrameOptionsConfig;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+@EnableWebSecurity
+public class H2AccessSecurityConfiguration {
+
+	@Bean
+	@Order(Ordered.HIGHEST_PRECEDENCE)
+	SecurityFilterChain h2ConsoleSecurityFilterChain(HttpSecurity http) throws Exception {
+		http.securityMatcher(PathRequest.toH2Console());
+		http.csrf(CsrfConfigurer::disable);
+		http.headers((headers) -> headers.frameOptions(FrameOptionsConfig::sameOrigin));
+		return http.build();
+	}
+}
+                                        </pre>
+                                </p>
+
+                                <p>Access h2-console at below url: <br/><br/>
+                                    <code>
+                                        http://localhost:8080/h2-console
+                                    </code>
+                                    <br/><br/>
+                                    In saved settings use Generic H2 server.
+                                    Use Driver Class, JDBC URL,  User Name and Oassword same as in application.properties file.
+                                </p>
+
+                                <p>
+                                    <figure class="image  is-16by9">
+                                        <img src="../img/h2-console.png"/>
+                                    </figure>
+                                </p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+            
+        </div>
+        </div>
+    </div>
+    
+</body>
+
+</html>
+

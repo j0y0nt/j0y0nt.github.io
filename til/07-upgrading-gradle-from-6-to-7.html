@@ -83,6 +83,17 @@
                                 </p>
                                 <br />
                                 <img src="../img/07-build-scan-2.png" />
+                                <br/> <br/>
+                                <p>
+                                    I was hit with error by gradle 7: "Configuration with name 'compile' not found."
+                                    <br />
+                                    And the solution was to upgrade "protobuf-gradle-plugin" plugin to 0.8.12 version, before I presented with next error.
+                                </p>
+                                <p>
+                                    The next error was : Could not get unknown property 'runtime' for configuration container of type org.gradle.api.internal.artifacts.configurations.DefaultConfigurationContainer.
+
+                                    And I have to change  configurations.runtime to  configurations.runtimeClass.
+                                </p>
                             </div>
                             
                         </div>
