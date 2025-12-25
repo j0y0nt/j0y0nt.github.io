@@ -5,12 +5,15 @@
     <link rel="stylesheet" href="./css/j0.css" />
   </head>
   <body class="container">
-  <div class="content">  
+  <div class="content">
+  <br />    
   <p>Installing FreeBSD in a virtualized environment often feels like a battle against legacy drivers.
     If you have ever run 'vidcontrol -i mode' only to be met with an empty list, or seen 'VT(vga): text 80x25' in your logs, this guide is for you.
     This is walk through in 2025: abandoning Legacy BIOS for UEFI, fixing resolution scaling, and installing KDE Plasma 6.
   </p>
   
+  <font class="has-text-danger"><b>This instuctions are for running FreeBSD 15 on Virtual Box 7, running on Windows 11 and intel i7-12700h pc. Hardware accelaration is NOT enabled.</b></font>
+  <br></br>
   <h4>THE FOUNDATION: WHY UEFI MATTERS</h4>
   <p>In FreeBSD 15, the modern 'vt' driver works best under UEFI using the Graphics Output Protocol (GOP).</p>
 
@@ -66,7 +69,7 @@
     <p>As of late 2025, KDE Plasma 6 is the default for the 'kde' package on FreeBSD.</p>
     <h4>Step 1: Install Packages</h4>
     <code># pkg install xorg kde sddm virtualbox-ose-additions</code>
-
+    <br></br>
     <h4>Step 2: System Configuration</h4>
     <p>KDE requires procfs and fdescfs. Add these to /etc/fstab:</p>
     <blockquote>
