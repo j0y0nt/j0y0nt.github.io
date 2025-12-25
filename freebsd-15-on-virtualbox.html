@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="./css/j0.css" />
   </head>
   <body class="container">
-
+  <div class="content">  
   <p>Installing FreeBSD in a virtualized environment often feels like a battle against legacy drivers.
     If you have ever run 'vidcontrol -i mode' only to be met with an empty list, or seen 'VT(vga): text 80x25' in your logs, this guide is for you.
     This is walk through in 2025: abandoning Legacy BIOS for UEFI, fixing resolution scaling, and installing KDE Plasma 6.
@@ -22,23 +22,30 @@
     <li>Display: Set Graphics Controller to "VBoxSVGA"</li>
     <li>Display: Set Video Memory to "128MB"</li>
   </ul>
-
-  <h4>FIXING THE CONSOLE RESOLUTION</h4>
-  <p>By default, the UEFI framebuffer driver (efifb) might auto-scale fonts to fit a standard 80x25 grid, making text look "huge" on high-res screens.</p>
-  <div>  
-    <h4>Step 1: Verify the Resolution</h4>
-    <p>Restart the VM. At the boot menu, press '3' to enter the loader prompt. Run:</p>
-    <code>'gop list'</code>
   </div>
 
   <div class="content">
-    <p>Identify your target resolution (e.g., 1280x800) and note the mode number.</p>
+  <h4>FIXING THE CONSOLE RESOLUTION</h4>
+  <p>By default, the UEFI framebuffer driver (efifb) might auto-scale fonts to fit a standard 80x25 grid, making text look "huge" on high-res screens.</p>
+    
+    <h4>Step 1: Verify the Resolution</h4>
+    <p>Restart the VM. At the boot menu, press '3' to enter the loader prompt. Run:</p>
+    <code>'gop list'</code> <br></br>
+    <p>You can set mode number on laoder prompt by running `gop set 5` command, where, in place of 5 you can use number with your targetted resolution. type `boot` and enter.</p>
+    <blockquote>
+        # gop set 5</br>
+        # boot </br>
+    </blockquote>
+  </div>
+
+  <div class="content">
+    <p>Identify your target resolution (e.g., 1280x800)</p>
     <h4>Step 2: Configure /boot/loader.conf</h4>
     <p>To make the resolution permanent and fix the scaling, edit /boot/loader.conf:</p>
     <blockquote>
-      efi_max_resolution="1280x800"
-      kern.vt.fb.default_mode="1280x800"
-      screen.font="8x16"
+      efi_max_resolution="1280x800"</br>
+      kern.vt.fb.default_mode="1280x800"</br>
+      screen.font="8x16"</br>
     </blockquote>
   </div>
 
@@ -57,35 +64,36 @@
   <div class="content">  
     <p><h3>INSTALLING KDE PLASMA 6 AND XORG</h3></p>
     <p>As of late 2025, KDE Plasma 6 is the default for the 'kde' package on FreeBSD.</p>
-    <p>Step 1: Install Packages</p>
-    <code>'pkg install xorg kde sddm virtualbox-ose-additions'</code>
-    <p>Step 2: System Configuration</p>
+    <h4>Step 1: Install Packages</h4>
+    <code># pkg install xorg kde sddm virtualbox-ose-additions</code>
+
+    <h4>Step 2: System Configuration</h4>
     <p>KDE requires procfs and fdescfs. Add these to /etc/fstab:</p>
     <blockquote>
-      proc /proc procfs rw 0 0
-      fdesc /dev/fd fdescfs rw 0 0
+      proc /proc procfs rw 0 0</br>
+      fdesc /dev/fd fdescfs rw 0 0</br>
     </blockquote>
 
-    <p>Step 3: Enable Services</p>
+    <h4>Step 3: Enable Services</h4>
     <p>Add the following to /etc/rc.conf:</p>
     <blockquote>
-      dbus_enable="YES"
-      sddm_enable="YES"
-      vboxguest_enable="YES"
-      vboxservice_enable="YES"
+      dbus_enable="YES"</br>
+      sddm_enable="YES"</br>
+      vboxguest_enable="YES"</br>
+      vboxservice_enable="YES"</br>
     </blockquote>
 
-    <p><h3>LAUNCHING THE DESKTOP</h3></p>
+    <h4>LAUNCHING THE DESKTOP</h4>
     <p>Ensure your user has hardware access:</p>
-    <blockquote>'pw groupmod video -m your_username'</blockquote>
+    <blockquote># pw groupmod video -m your_username</blockquote>
     <br/>
     <p>
         Reboot the system. You will reach the SDDM login screen. You can now choose between the Plasma (X11) or Plasma (Wayland) sessions. For VirtualBox environments in 2025, X11 is still recommended for smoother window resizing.
     </p>
       
-    <h3>CONCLUSION</h3>
+    <h4>CONCLUSION</h4>
     <p>By moving to UEFI and the 'efifb' driver, you bypass the limitations of legacy VGA. You now have a high-resolution, modern FreeBSD 15 workstation running KDE Plasma 6.</p>
-
+    <br/>
     </div>
   </body>
 </html>
