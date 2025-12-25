@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
     <link rel="stylesheet" href="./css/j0.css" />
   </head>
-  <body>
+  <body class="container">
 
     <p>Installing FreeBSD in a virtualized environment often feels like a battle against legacy drivers.
       If you have ever run 'vidcontrol -i mode' only to be met with an empty list, or seen 'VT(vga): text 80x25' in your logs, this guide is for you.
@@ -32,7 +32,7 @@
     <code>'gop list'</code>
   </div>
 
-  <div>
+  <div class="content">
     <p>Identify your target resolution (e.g., 1280x800) and note the mode number.</p>
     <b>Step 2: Configure /boot/loader.conf</b>
     <p>To make the resolution permanent and fix the scaling, edit /boot/loader.conf:</p>
@@ -43,8 +43,8 @@
     </code>
   </div>
 
-  <div>
-    <p>NETWORKING: THE "NO ROUTE TO HOST" PITFALL</p>
+  <div class="content">
+    <p><b>NETWORKING: THE "NO ROUTE TO HOST" PITFALL</b></p>
     <p>If 'pkg install' fails with address resolution errors, check your connectivity:</p>
 
     <b>Test IP: 'ping -c3 8.8.8.8'</b>
@@ -55,7 +55,7 @@
     </p>
   </div>
 
-  <div>  
+  <div class="content">  
     <p><br>INSTALLING KDE PLASMA 6 AND XORG</br></p>
     <p>As of late 2025, KDE Plasma 6 is the default for the 'kde' package on FreeBSD.</p>
     <p>Step 1: Install Packages</p>
@@ -86,5 +86,7 @@
       
     <b>CONCLUSION</b>
     <p>By moving to UEFI and the 'efifb' driver, you bypass the limitations of legacy VGA. You now have a high-resolution, modern FreeBSD 15 workstation running KDE Plasma 6.</p>
+
+    </div>
   </body>
 </html>
