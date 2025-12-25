@@ -11,11 +11,11 @@
       This is walk through in 2025: abandoning Legacy BIOS for UEFI, fixing resolution scaling, and installing KDE Plasma 6.
     </p>
     
-  <p><b>THE FOUNDATION: WHY UEFI MATTERS</b></p>
+  <p><h3>THE FOUNDATION: WHY UEFI MATTERS</h3></p>
   <p>In FreeBSD 15, the modern 'vt' driver works best under UEFI using the Graphics Output Protocol (GOP).</p>
 
   <p>
-    <b>VirtualBox VM Setup (Before Installation):</b>
+    <h3>VirtualBox VM Setup (Before Installation):</h3>
     <ul>
       <li>System > Motherboard: Check "Enable EFI"</li>
       <li>System > Motherboard: Set Chipset to "ICH9"</li>
@@ -24,7 +24,7 @@
     </ul>
   </p>
 
-  <p> <b>FIXING THE CONSOLE RESOLUTION </b> </p>
+  <p> <h3>FIXING THE CONSOLE RESOLUTION </h3> </p>
   <p>By default, the UEFI framebuffer driver (efifb) might auto-scale fonts to fit a standard 80x25 grid, making text look "huge" on high-res screens.</p>
   <div>  
     <p>Step 1: Verify the Resolution</p>
@@ -34,20 +34,20 @@
 
   <div class="content">
     <p>Identify your target resolution (e.g., 1280x800) and note the mode number.</p>
-    <b>Step 2: Configure /boot/loader.conf</b>
+    <h3>Step 2: Configure /boot/loader.conf</h3>
     <p>To make the resolution permanent and fix the scaling, edit /boot/loader.conf:</p>
-    <code>
+    <blockquote>
       efi_max_resolution="1280x800"
       kern.vt.fb.default_mode="1280x800"
       screen.font="8x16"
-    </code>
+    </blockquote>
   </div>
 
   <div class="content">
-    <p><b>NETWORKING: THE "NO ROUTE TO HOST" PITFALL</b></p>
+    <p><h3>NETWORKING: THE "NO ROUTE TO HOST" PITFALL</h3></p>
     <p>If 'pkg install' fails with address resolution errors, check your connectivity:</p>
 
-    <b>Test IP: 'ping -c3 8.8.8.8'</b>
+    <h3>Test IP: 'ping -c3 8.8.8.8'</h3>
     
     <p>If it says "No route to host", force DHCP: 'dhclient em0' (replace em0 with your interface name).
       Ensure your /etc/rc.conf contains: ifconfig_em0="DHCP"
@@ -56,35 +56,35 @@
   </div>
 
   <div class="content">  
-    <p><br>INSTALLING KDE PLASMA 6 AND XORG</br></p>
+    <p><h3>INSTALLING KDE PLASMA 6 AND XORG</h3></p>
     <p>As of late 2025, KDE Plasma 6 is the default for the 'kde' package on FreeBSD.</p>
     <p>Step 1: Install Packages</p>
     <code>'pkg install xorg kde sddm virtualbox-ose-additions'</code>
     <p>Step 2: System Configuration</p>
     <p>KDE requires procfs and fdescfs. Add these to /etc/fstab:</p>
-    <code>
+    <blockquote>
       proc /proc procfs rw 0 0
       fdesc /dev/fd fdescfs rw 0 0
-    </code>
+    </blockquote>
 
     <p>Step 3: Enable Services</p>
     <p>Add the following to /etc/rc.conf:</p>
-    <code>
+    <blockquote>
       dbus_enable="YES"
       sddm_enable="YES"
       vboxguest_enable="YES"
       vboxservice_enable="YES"
-    </code>
+    </blockquote>
 
-    <p><b>LAUNCHING THE DESKTOP</b></p>
+    <p><h3>LAUNCHING THE DESKTOP</h3></p>
     <p>Ensure your user has hardware access:</p>
-    <code>'pw groupmod video -m your_username'</code>
+    <blockquote>'pw groupmod video -m your_username'</blockquote>
     <br/>
     <p>
         Reboot the system. You will reach the SDDM login screen. You can now choose between the Plasma (X11) or Plasma (Wayland) sessions. For VirtualBox environments in 2025, X11 is still recommended for smoother window resizing.
     </p>
       
-    <b>CONCLUSION</b>
+    <h3>CONCLUSION</h3>
     <p>By moving to UEFI and the 'efifb' driver, you bypass the limitations of legacy VGA. You now have a high-resolution, modern FreeBSD 15 workstation running KDE Plasma 6.</p>
 
     </div>
