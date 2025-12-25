@@ -6,35 +6,34 @@
   </head>
   <body class="container">
 
-    <p>Installing FreeBSD in a virtualized environment often feels like a battle against legacy drivers.
-      If you have ever run 'vidcontrol -i mode' only to be met with an empty list, or seen 'VT(vga): text 80x25' in your logs, this guide is for you.
-      This is walk through in 2025: abandoning Legacy BIOS for UEFI, fixing resolution scaling, and installing KDE Plasma 6.
-    </p>
-    
-  <p><h3>THE FOUNDATION: WHY UEFI MATTERS</h3></p>
+  <p>Installing FreeBSD in a virtualized environment often feels like a battle against legacy drivers.
+    If you have ever run 'vidcontrol -i mode' only to be met with an empty list, or seen 'VT(vga): text 80x25' in your logs, this guide is for you.
+    This is walk through in 2025: abandoning Legacy BIOS for UEFI, fixing resolution scaling, and installing KDE Plasma 6.
+  </p>
+  
+  <h4>THE FOUNDATION: WHY UEFI MATTERS</h4>
   <p>In FreeBSD 15, the modern 'vt' driver works best under UEFI using the Graphics Output Protocol (GOP).</p>
 
-  <p>
-    <h3>VirtualBox VM Setup (Before Installation):</h3>
-    <ul>
-      <li>System > Motherboard: Check "Enable EFI"</li>
-      <li>System > Motherboard: Set Chipset to "ICH9"</li>
-      <li>Display: Set Graphics Controller to "VBoxSVGA"</li>
-      <li>Display: Set Video Memory to "128MB"</li>
-    </ul>
-  </p>
+  <h4>VirtualBox VM Setup (Before Installation):</h4>
+  
+  <ul>
+    <li>System > Motherboard: Check "Enable EFI"</li>
+    <li>System > Motherboard: Set Chipset to "ICH9"</li>
+    <li>Display: Set Graphics Controller to "VBoxSVGA"</li>
+    <li>Display: Set Video Memory to "128MB"</li>
+  </ul>
 
-  <p> <h3>FIXING THE CONSOLE RESOLUTION </h3> </p>
+  <h4>FIXING THE CONSOLE RESOLUTION</h4>
   <p>By default, the UEFI framebuffer driver (efifb) might auto-scale fonts to fit a standard 80x25 grid, making text look "huge" on high-res screens.</p>
   <div>  
-    <p>Step 1: Verify the Resolution</p>
+    <h4>Step 1: Verify the Resolution</h4>
     <p>Restart the VM. At the boot menu, press '3' to enter the loader prompt. Run:</p>
     <code>'gop list'</code>
   </div>
 
   <div class="content">
     <p>Identify your target resolution (e.g., 1280x800) and note the mode number.</p>
-    <h3>Step 2: Configure /boot/loader.conf</h3>
+    <h4>Step 2: Configure /boot/loader.conf</h4>
     <p>To make the resolution permanent and fix the scaling, edit /boot/loader.conf:</p>
     <blockquote>
       efi_max_resolution="1280x800"
