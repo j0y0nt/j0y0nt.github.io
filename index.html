@@ -1,56 +1,147 @@
 <!DOCTYPE html>
-<html>
-  <head>
-  <title>Day Zero</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
-  <link rel="stylesheet" href="./css/j0.css" />
-  </head>
-  <body link="#800080" bgcolor="#ffffff" text="#000080" vlink="#ff0000">
-    <p align="center">
-      <b>
-        <font size="6">Hey,</font>
-        <font size="4"></font>
-        <font size="6">H</font>
-        <font size="4">ow you doing?</font>
-        <font size="2">
-          <br>About Cloud & Programming<br>& Other Stuffs.
-        </font>
-        <br>
-      </b>
-      <font size="1">&nbsp;</font></p>
-      <div class="container is-fluid" id="appdiv">
-        <div>
-          <ul>
-            <li><a href="./aws-lambda-cheatsheet.html">AWS Lambda CheatSheet</a></li>
-            <li><a href="./jenkins.html">Jenkins</a></li>
-            <li><a href="./sam-app.html">Serverless Application Model (SAM)</a></li>
-            <li><a href="./quarkus.html">Quarkus App</a></li>
-            <li><a href="./minikube-and-docker.html">Commands: Minikube and Docker</a></li>
-          </ul>  
-        </div>
-        <br/>
-        <div>
-          <ul>
-            <li><a href="./til/spring-data-mongodb-auto-index-creation.html">TIL01 -  MongoDB Index Auto Creation, Spring Boot, and MongoDB TestContainers.</a></li>
-            <li><a href="./til/trailing-slash-in-django-urls.html">TIL02 -  Trailing slash in Django URLs.</a></li>
-            <li><a href="./til/flask-tdd-setup.html">TIL03 -  Flask, Selenium and Test Driven Development</a></li>
-            <li><a href="./til/create-react-app-proxy-error.html">TIL04 -  Error occurred while trying to proxy: localhost:3000/login</a></li>
-            <li><a href="./til/windows-11-and-curl.html">TIL05 -  Windows 11 curl is Invoke-WebRequest in disguise.</a></li>
-            <li><a href="./til/06-java-vs-erlang.html">TIL06 -  Only if, Erlang.</a></li>
-            <li><a href="./til/07-upgrading-gradle-from-6-to-7.html">TIL07 -  Upgrading gradle from 6.9.1 version to 7.0.</a></li>
-            <li><a href="./til/08-spring-boot-h2-web-console.html">TIL08 -  Spring Boot web app and h2 console.</a></li>
-            
-          </ul>  
-        </div>
-      </div>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>j0y0nt | Notes & TIL</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --tag-bg: #334155;
+      --border: #334155;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --card-bg: #ffffff;
+        --text: #0f172a;
+        --muted: #64748b;
+        --accent: #0284c7;
+        --tag-bg: #f1f5f9;
+        --border: #e2e8f0;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2.5rem 1rem;
+    }
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    header {
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+    }
+    h1 { font-size: 1.75rem; font-weight: 700; color: var(--text); }
+    header p { color: var(--muted); margin-top: 0.25rem; font-size: 0.95rem; }
+    
+    .section-title {
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      margin: 2rem 0 1rem 0;
+    }
+    .list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .item-link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.2s ease;
+    }
+    .item-link:hover {
+      border-color: var(--accent);
+      transform: translateX(4px);
+    }
+    .tag {
+      font-size: 0.75rem;
+      font-family: monospace;
+      padding: 0.2rem 0.5rem;
+      background: var(--tag-bg);
+      border-radius: 4px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Hey, how you doing?</h1>
+      <p>Personal log of issues, cheatsheets, and backend discoveries.</p>
+    </header>
 
-      <div class="container is-fluid" id="appdiv">
-        <div>
-          <ul>
-            <li><a href="./freebsd-15-on-virtualbox.html">FreeBSD</a></li>
-          </ul>  
-        </div>
-      </div>  
-</div>
-  </body>
+    <main>
+      <h2 class="section-title">Today I Learned (TIL)</h2>
+      <ul class="list">
+        <li>
+          <a class="item-link" href="./til/spring-data-mongodb-auto-index-creation.html">
+            <span>Spring Data MongoDB Auto Index & TestContainers</span>
+            <span class="tag">Spring / Mongo</span>
+          </a>
+        </li>
+        <li>
+          <a class="item-link" href="./til/08-spring-boot-h2-web-console.html">
+            <span>Spring Boot Web App & H2 Console</span>
+            <span class="tag">Java</span>
+          </a>
+        </li>
+        <li>
+          <a class="item-link" href="./til/windows-11-and-curl.html">
+            <span>Windows 11 curl is Invoke-WebRequest in disguise</span>
+            <span class="tag">CLI</span>
+          </a>
+        </li>
+        <li>
+          <a class="item-link" href="./til/trailing-slash-in-django-urls.html">
+            <span>Trailing slash in Django URLs</span>
+            <span class="tag">Python</span>
+          </a>
+        </li>
+      </ul>
+
+      <h2 class="section-title">Cheatsheets & References</h2>
+      <ul class="list">
+        <li>
+          <a class="item-link" href="./aws-lambda-cheatsheet.html">
+            <span>AWS Lambda Cheatsheet</span>
+            <span class="tag">AWS</span>
+          </a>
+        </li>
+        <li>
+          <a class="item-link" href="./minikube-and-docker.html">
+            <span>Minikube and Docker Commands</span>
+            <span class="tag">DevOps</span>
+          </a>
+        </li>
+        <li>
+          <a class="item-link" href="./quarkus.html">
+            <span>Quarkus App Setup</span>
+            <span class="tag">Java</span>
+          </a>
+        </li>
+      </ul>
+    </main>
+  </div>
+</body>
 </html>

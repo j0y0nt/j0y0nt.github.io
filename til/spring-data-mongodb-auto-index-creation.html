@@ -1,51 +1,31 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Day Zero</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TIL01 - MongoDB Index Auto Creation and Spring Boot Testcontainers</title>
+  <link rel="stylesheet" href="../css/style.css">
 </head>
+<body>
+  <div class="container">
+    <a href="../index.html" class="nav-back">← Back to Notes</a>
 
-<body link="#800080" bgcolor="#ffffff" text="#000080" vlink="#ff0000">
-    <p align="center">
-        <b>
-            <font size="6">Hey,</font>
-            <font size="4"></font>
-            <font size="6">H</font>
-            <font size="4">ow you doing?</font>
-            <font size="2">
-                <br>About Cloud & Programming<br>& Other Stuffs.
-            </font>
-            <br>
-        </b>
-        <font size="1">&nbsp;</font>
-    </p>
-    <div class="container is-fluid">
-        <div class="tabs">
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-            </ul>
-        </div>
-        <article class="message is-dark">
-            <div class="message-header">
-                <p>MongoDB index auto creation and spring boot test containers.</p>
-            </div>
-            <div class="message-body content">
-                <p style="white-space: pre-wrap">
-                    Today a simple unit test case to throw DuplicateKeyException failed,
-                    when item with same value is inserted. Apparently in Testcontainers you have to enable
-                    following property so that MongoDB create unique index for entity(ies):
+    <header>
+      <h1>TIL01 — MongoDB Index Auto Creation & Testcontainers</h1>
+      <p class="tag-meta">Filed under: Spring Boot, MongoDB, Testcontainers</p>
+    </header>
 
-                    spring.data.mongodb.auto-index-creation=true
+    <main>
+      <p>
+        Today a simple unit test case expected to throw <code>DuplicateKeyException</code> failed when an item with the same unique value was inserted.
+      </p>
+      
+      <p>
+        Apparently, when running tests with Testcontainers, you have to explicitly enable the following property so Spring Data MongoDB creates the unique index for your entity/entities:
+      </p>
 
-                </p>
-            </div>
-        </article>
-
-        
-    </div>
-    </div>
+      <pre><code>spring.data.mongodb.auto-index-creation=true</code></pre>
+    </main>
+  </div>
 </body>
-
 </html>
-

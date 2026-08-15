@@ -1,73 +1,35 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Day Zero</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css" />
-    <link rel="stylesheet" href="./css/j0.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TIL08 - Enable H2 Web Console in Spring Boot App</title>
+  <link rel="stylesheet" href="../css/style.css" />
 </head>
-<body link="#800080"  text="#000080" vlink="#ff0000">
-    <div>
+<body>
+  <div class="container">
+    <a href="../index.html" class="nav-back">← Back to Notes</a>
 
-        <p align="center">
-            <b>
-                <font size="6">Hey,</font>
-                <font size="4"></font>
-                <font size="6">H</font>
-                <font size="4">ow you doing?</font>
-                <font size="2">
-                    <br>About Cloud & Programming<br>& Other Stuffs.
-                </font>
-                <br>
-            </b>
-            <font size="1">&nbsp;</font>
-        </p>
-        <div class="container is-fluid">
-            <div class="tabs">
-                <ul>
-                    <li><a href="./index.html">Home</a></li>
-                </ul>
-            </div>
-            <article class="message is-link">
-                <div class="message-header">
-                    <p>TIL08 - Enable h2 web-console in spring boot app.</p>
-                </div>
-            </article>
-            <p></p>
-            <br/>
-            <div class="columns is-multiline">
-                <div class="column">
-                    <div class="card blue-card">
-                        <header class="card-header">
-                            <p class="card-header-title"></p>
-                        </header>
-                        <div class="card-content">
-                            <div class="content">
-                                <p>
-                                    Self-reminder! - Save time by doing this in new spring boot project when h2 db is used for testing or whatever.
-                                </p>
-                                <br/>
-                                <p>
-                                    In application.properties:
-                                    <code>
-                                    <br/><br/> 
-                                    spring.h2.console.enabled=true
-                                    <br/> <br/>    
-spring.datasource.url=jdbc:h2:mem:mydb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE<br/>
-spring.datasource.driverClassName=org.h2.Driver<br/>
-spring.datasource.username=sa<br/>
-spring.datasource.password=password<br/>
-spring.jpa.database-platform=org.hibernate.dialect.H2Dialect<br/>
-</code>
-                                </p>
-                               
-                                <p>
-                                    If You are using spring security, add below config, because h2 uses embedded frame and then you get 403 because of CSRF protection:
-                                </p>
+    <header>
+      <h1>TIL08 — Enable H2 Web Console in Spring Boot</h1>
+      <p class="tag-meta">Self-reminder: Save time by doing this in new Spring Boot projects when H2 DB is used for testing.</p>
+    </header>
 
-                                <p><pre>
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
+    <main>
+      <h2>1. Configuration in <code>application.properties</code></h2>
+      <pre><code>spring.h2.console.enabled=true
+spring.datasource.url=jdbc:h2:mem:mydb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=password
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect</code></pre>
+
+      <h2>2. Spring Security Configuration</h2>
+      <p>
+        If you are using Spring Security, add the configuration below. H2 uses an embedded frame, which causes <strong>403 Forbidden</strong> errors due to CSRF protection and frame options:
+      </p>
+
+      <pre><code>import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -82,46 +44,28 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class H2AccessSecurityConfiguration {
 
-	@Bean
-	@Order(Ordered.HIGHEST_PRECEDENCE)
-	SecurityFilterChain h2ConsoleSecurityFilterChain(HttpSecurity http) throws Exception {
-		http.securityMatcher(PathRequest.toH2Console());
-		http.csrf(CsrfConfigurer::disable);
-		http.headers((headers) -> headers.frameOptions(FrameOptionsConfig::sameOrigin));
-		return http.build();
-	}
-}
-                                        </pre>
-                                </p>
+    @Bean
+    @Order(Ordered.HIGHEST_PRECEDENCE)
+    SecurityFilterChain h2ConsoleSecurityFilterChain(HttpSecurity http) throws Exception {
+        http.securityMatcher(PathRequest.toH2Console());
+        http.csrf(CsrfConfigurer::disable);
+        http.headers((headers) -> headers.frameOptions(FrameOptionsConfig::sameOrigin));
+        return http.build();
+    }
+}</code></pre>
 
-                                <p>Access h2-console at below url: <br/><br/>
-                                    <code>
-                                        http://localhost:8080/h2-console
-                                    </code>
-                                    <br/><br/>
-                                    In saved settings use Generic H2 server.
-                                    Use Driver Class, JDBC URL,  User Name and Oassword same as in application.properties file.
-                                </p>
+      <h2>3. Accessing the Console</h2>
+      <p>Access the H2 console in your browser at:</p>
+      <p><code>http://localhost:8080/h2-console</code></p>
+      
+      <p>
+        In saved settings, select <strong>Generic H2 (Embedded)</strong>. Ensure Driver Class, JDBC URL, Username, and Password match your <code>application.properties</code> values.
+      </p>
 
-                                <p>
-                                    <figure class="image  is-16by9">
-                                        <img src="../img/h2-console.png"/>
-                                    </figure>
-                                </p>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-                
-                
-            </div>
-            
-        </div>
-        </div>
-    </div>
-    
+      <figure class="screenshot-wrapper">
+        <img src="../img/h2-console.png" alt="H2 Web Console Login Screen" />
+      </figure>
+    </main>
+  </div>
 </body>
-
 </html>
-
